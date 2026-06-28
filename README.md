@@ -1,4 +1,4 @@
-# FFmpegKit (community rebuild)
+# FFmpegKit (community rebuild).
 
 > A community-maintained rebuild of [`arthenica/ffmpeg-kit`](https://github.com/arthenica/ffmpeg-kit) for **Android** and **iOS**.
 
