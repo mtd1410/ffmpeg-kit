@@ -1,4 +1,4 @@
-# FFmpegKit (community rebuild).
+# FFmpegKit (community rebuild)
 
 > A community-maintained rebuild of [`arthenica/ffmpeg-kit`](https://github.com/arthenica/ffmpeg-kit) for **Android** and **iOS**.
 
@@ -11,7 +11,7 @@ Because our applications still depend on it, this repository **rebuilds and repu
 A few important notes:
 
 - **No GPL builds.** To avoid `GPL` licensing obligations, no `GPL`-licensed libraries (e.g. `x264`, `x265`, `xvidcore`, `vid.stab`) are enabled and no `-gpl` packages are published. Everything here is built under `LGPL v3.0`.
-- **FFmpeg version.** Currently built against **FFmpeg up to v6**.
+- **FFmpeg version.** Currently built against **FFmpeg 7.1**.
 - **Platforms.** Only **Android** and **iOS** are supported and published.
 
 ## Usage
@@ -23,11 +23,11 @@ For the full API (running commands, sessions, callbacks, FFprobe, etc.) see the 
 
 ```ruby
 # Podfile
-pod 'ffmpeg-mobile-min', '~> 6.0'
-# pod 'ffmpeg-mobile-https', '~> 6.0'
-# pod 'ffmpeg-mobile-audio', '~> 6.0'
-# pod 'ffmpeg-mobile-video', '~> 6.0'
-# pod 'ffmpeg-mobile-full',  '~> 6.0'
+pod 'ffmpeg-mobile-min', '~> 7.1'
+# pod 'ffmpeg-mobile-https', '~> 7.1'
+# pod 'ffmpeg-mobile-audio', '~> 7.1'
+# pod 'ffmpeg-mobile-video', '~> 7.1'
+# pod 'ffmpeg-mobile-full',  '~> 7.1'
 ```
 
 See [`apple/README.md`](apple/README.md) for the iOS API.
@@ -38,11 +38,11 @@ Published to Maven Central under the `io.github.maitrungduc1410` group.
 
 ```groovy
 dependencies {
-    implementation 'io.github.maitrungduc1410:ffmpeg-kit-min:6.0.1'
-    // implementation 'io.github.maitrungduc1410:ffmpeg-kit-https:6.0.1'
-    // implementation 'io.github.maitrungduc1410:ffmpeg-kit-audio:6.0.1'
-    // implementation 'io.github.maitrungduc1410:ffmpeg-kit-video:6.0.1'
-    // implementation 'io.github.maitrungduc1410:ffmpeg-kit-full:6.0.1'
+    implementation 'io.github.maitrungduc1410:ffmpeg-kit-min:7.1.5'
+    // implementation 'io.github.maitrungduc1410:ffmpeg-kit-https:7.1.5'
+    // implementation 'io.github.maitrungduc1410:ffmpeg-kit-audio:7.1.5'
+    // implementation 'io.github.maitrungduc1410:ffmpeg-kit-video:7.1.5'
+    // implementation 'io.github.maitrungduc1410:ffmpeg-kit-full:7.1.5'
 }
 ```
 
