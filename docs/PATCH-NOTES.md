@@ -5,6 +5,51 @@ Changes in this community rebuild relative to upstream
 For packages, licensing and platform support see the [project README](../README.md);
 for releasing see the README's "Releasing" section.
 
+## 8.1.2 — FFmpeg 7.1 → 8.1
+
+Upgrades the bundled FFmpeg from `n7.1.5` to `n8.1.2` (arthenica's FFmpeg mirror) for
+**both Android and iOS**. No FFmpegKit API or behaviour changes — only the version
+bump and the version-string updates.
+
+**Why this is a small change.** As with the 6.0 → 7.1 bump, FFmpegKit's frozen
+`fftools_*.c/.h` copies depend only on the public `libavcodec` / `libavformat` /
+`libavutil` API, which is stable across the 7.1 → 8.1 boundary. Crucially, although
+upstream `ffmpeg-kit` is retired, arthenica's **FFmpeg** mirror still carries the
+mobile patches and is tagged through `n8.1.2`, so no `fftools`/patch rebase is needed
+on our side — only the source pin moves.
+
+**Changed**
+
+- **FFmpeg source pin** `n7.1.5` → `n8.1.2` (`scripts/source.sh`). No external library
+  versions needed bumping.
+- **Version strings** bumped `7.1` → `8.1`:
+  - Android native: `ffmpegkit.h` (`FFMPEG_KIT_VERSION`)
+  - Android Java test-mode fallback: `NativeLoader.loadVersion()`
+  - Android Gradle: `tools/android/build.gradle`, `tools/android/build.lts.gradle`
+    (`versionName`), and the publish default in
+    `android/ffmpeg-kit-android-lib/build.gradle` (`7.1.5` → `8.1.2`)
+  - iOS: `apple/src/FFmpegKitConfig.m` (`FFmpegKitVersion`)
+  - Linux: `linux/src/FFmpegKitConfig.h` (kept in sync; not published)
+- **README** — "built against FFmpeg 7.1" → "FFmpeg 8.1" (7.1 / 6.0 remain available).
+
+**Toolchain.** FFmpeg 8 dropped `yasm` in favour of `nasm` for x86/x86_64 assembly.
+Both build workflows already install `nasm`, so no CI change is required (Android
+`x86`/`x86_64` and the iOS simulator `x86_64` slice pick it up; arm64/armv7 are
+unaffected).
+
+**Heads-up for apps (FFmpeg 8 CLI changes).** FFmpegKit runs raw command strings, so
+apps using options removed/changed in FFmpeg 8 must update them, notably:
+`-vbsf`/`-absf`/`-sbsf` → `-bsf:v`/`-bsf:a`/`-bsf:s`; `-qscale` now applies to all
+streams (use `-qscale:v` for the old behaviour); `-intra` removed (use `-g 0`);
+`-vlang`/`-alang` removed (use `-metadata:s:… language=…`); and `-map_metadata`
+now takes only an input specifier.
+
+**Credit.** The community, Android-focused fork
+[`ffmpegkit-maintained/ffmpeg-kit`](https://github.com/ffmpegkit-maintained/ffmpeg-kit)
+confirms this same `n8.1.2` pin builds against the existing external-library versions
+(its `android-8.1-lts` tree differs from `7.1` only by the FFmpeg pin plus an optional
+Whisper source, which we do not enable). The iOS side is validated independently here.
+
 ## 7.1.5 — FFmpeg 6.0 → 7.1
 
 Upgrades the bundled FFmpeg from `n6.0` to `n7.1.5` (arthenica's FFmpeg mirror) for
